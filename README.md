@@ -1,5 +1,10 @@
-SOLVING MAZES
+Path Finder App with Dijkstra's algorithm
+
+![My Image](images/Map.png)
+
 ## Overview
+
+Get lost at the middle of the traffic? No problem, here comes Path Finder App. By using Dijkstra's algorithm is App will automatically generate the most optimal route for user to get to the destination.
 
 The Solving Mazes programs takes the maze input text files and input from the user. The user can see:
 - the maze displayed without a solution
