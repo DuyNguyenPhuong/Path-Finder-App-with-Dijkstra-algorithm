@@ -25,40 +25,8 @@ After upon execution, the user is prompted whether or not they want to display t
 $ Do you want to display the solution?
 $ Type "yes" or "no"
 ```
-If the user types "yes," the maze is displayed with the solution squares marked with a `*`:
-```
-$ This is a solution!
-$ +-----+-----+-----+-----+
-$ |                       |
-$ |  S                    |
-$ |                       |
-$ +     +-----+-----+     +
-$ |     |           |     |
-$ |  *  |           |     |
-$ |     |           |     |
-$ +     +-----+-----+-----+
-$ |                       |
-$ |  *     *     *     F  |
-$ |                       |
-$ +-----+-----+-----+-----+
-```
+
 If the user types "no," then the maze is displayed without the solution: 
-```
-$ Okay good luck!
-$ +-----+-----+-----+-----+
-$ |                       |
-$ |  S                    |
-$ |                       |
-$ +     +-----+-----+     +
-$ |     |           |     |
-$ |     |           |     |
-$ |     |           |     |
-$ +     +-----+-----+-----+
-$ |                       |
-$ |                    F  |
-$ |                       |
-$ +-----+-----+-----+-----+
-```
 
 If the user makes a typo when typing yes or no, the user will be asked to type yes or no again: 
 ```
