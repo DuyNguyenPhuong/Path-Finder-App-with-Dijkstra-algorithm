@@ -213,6 +213,13 @@ public class Maze {
         return squares[row][col];
     }
 
+    /**
+     * check if the maze square above the current one is directly 
+     * accessible and unvisited. Return the MazeSquare if it's unvisited
+     * and acessbile, else, return null.
+     * @param tempSquare the MazeSquare we are currently on.
+     * @return MazeSquare or null
+     */
     public MazeSquare checkTop(MazeSquare tempSquare){
       int nextRow = tempSquare.getRow() - 1;
       int nextColumn = tempSquare.getColumn();
@@ -226,6 +233,13 @@ public class Maze {
       return null;
     }
 
+    /**
+     * check if the maze square to the right of the current one is directly 
+     * accessible and unvisited. Return the MazeSquare if it's unvisited
+     * and acessbile, else, return null.
+     * @param tempSquare the MazeSquare we are currently on.
+     * @return MazeSquare or null
+     */
     public MazeSquare checkRight(MazeSquare tempSquare){
       int nextRow = tempSquare.getRow();
       int nextColumn = tempSquare.getColumn()+1;
@@ -238,7 +252,14 @@ public class Maze {
       }
       return null;
     }
-
+    
+    /**
+     * check if the maze square under the current one is directly 
+     * accessible and unvisited. Return the MazeSquare if it's unvisited
+     * and acessbile, else, return null.
+     * @param tempSquare the MazeSquare we are currently on.
+     * @return MazeSquare or null
+     */
     public MazeSquare checkBottom(MazeSquare tempSquare){
       int nextRow = tempSquare.getRow() + 1;
       int nextColumn = tempSquare.getColumn();
@@ -252,6 +273,13 @@ public class Maze {
       return null;
     }
 
+    /**
+     * check if the maze square to the left of the current one is directly 
+     * accessible and unvisited. Return the MazeSquare if it's unvisited
+     * and acessbile, else, return null.
+     * @param tempSquare the MazeSquare we are currently on.
+     * @return MazeSquare or null
+     */
     public MazeSquare checkLeft(MazeSquare tempSquare){
       int nextRow = tempSquare.getRow();
       int nextColumn = tempSquare.getColumn() -1;
@@ -266,19 +294,16 @@ public class Maze {
     }
 
     /**
-     * 
+     * Create a stack of type MazeSquare, then use the check methods
+     * to build up a stack of maze squares leading to the solution.
      * @return stack of MazeSquares which is the solution to the maze.
+     * If the stack is empty, return null. 
      */
     public Stack<MazeSquare> getSolution() {
-      // 1. Create an empty stack of maze squares
       Stack<MazeSquare> solution = new LinkedStack<MazeSquare>();
-      // 2, Get the start square.
       MazeSquare startSquare = squares[startRow][startColumn];
-      // 3. Add the start square to the stack and mark 
-      // the start square as ‘visited’.
       solution.push(startSquare);
       startSquare.setVisited();
-      // 4.
       MazeSquare currentSquare = startSquare;
       
       while (!solution.isEmpty()){
@@ -292,32 +317,32 @@ public class Maze {
           MazeSquare adjacentSquare = checkTop(currentSquare);
           checkTop(currentSquare).setVisited();
           currentSquare = adjacentSquare;
- 
         } 
+        
         else if(checkRight(currentSquare) != null){
           solution.push(checkRight(currentSquare));
           checkRight(currentSquare).setSolutionPiece();
           MazeSquare adjacentSquare = checkRight(currentSquare);
           checkRight(currentSquare).setVisited();
           currentSquare = adjacentSquare;
-
         }
+
         else if(checkLeft(currentSquare) != null){
           solution.push(checkLeft(currentSquare));
           checkLeft(currentSquare).setSolutionPiece();
           MazeSquare adjacentSquare = checkLeft(currentSquare);
           checkLeft(currentSquare).setVisited();
           currentSquare = adjacentSquare;
-    
         }
+
         else if(checkBottom(currentSquare) != null){
           solution.push(checkBottom(currentSquare));
           checkBottom(currentSquare).setSolutionPiece();
           MazeSquare adjacentSquare = checkBottom(currentSquare);
           checkBottom(currentSquare).setVisited();
           currentSquare = adjacentSquare;
-       
         }
+
         else {
           currentSquare.resetSolutionPiece();
           solution.pop();
@@ -334,21 +359,36 @@ public class Maze {
   }
  
     /**
-     * 
-     * @param args
+     * Take maze file the user inputs in the command line argument,
+     * then lets the user choose whether or not they would like
+     * a maze solution displayed for them. 
+     * @param args name of the maze file
      */
     public static void main(String[] args) {
       if(args.length == 1) {
         Maze myMaze = new Maze();
         myMaze.load(args[0]);
-        myMaze.print(false);
 
-      Stack<MazeSquare> testhi = myMaze.getSolution();
-        if (testhi== null){
-          System.out.println("This maze is unsolvable!");
-        }
-        else{
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Do you want to display the solution?");
+        System.out.println("Type \"yes\" or \"no\"");
+        String userInput = myObj.nextLine();
+        if (userInput.equals("yes")){
+          Stack<MazeSquare> solutionPath = myMaze.getSolution();
+          if (solutionPath == null){
+            System.out.println("This maze is unsolvable!");
+          }
+          else{
+            System.out.println("This is a solution!");
+            myMaze.print(false);
+          } 
+        } 
+        else if (userInput.equals("no")){
+          System.out.println("Okay good luck!");
           myMaze.print(false);
+        } 
+        else{
+          System.out.println("Please type \"yes\" or \"no\"");
         }
       }
     } 

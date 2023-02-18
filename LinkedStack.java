@@ -11,11 +11,9 @@ public class LinkedStack<T> implements Stack<T> {
     * A class implementing a linked node. The node contains a piece of
     * data and also points to the data in another node. 
     */
-
     private class Node {
         private T    data; 
         private Node next;
-
     
         private Node(T dataPortion) {
             this(dataPortion, null);
@@ -45,7 +43,8 @@ public class LinkedStack<T> implements Stack<T> {
     public T pop() {
         if (topNode == null){
             return null;
-        } else{
+        } 
+        else{
             T currentTopdata = topNode.data;
             topNode = topNode.next;
             return currentTopdata;
@@ -59,8 +58,8 @@ public class LinkedStack<T> implements Stack<T> {
     public T peek() {
         if (!isEmpty()){
             return topNode.data;
-        } else{
-            //System.out.println("This stack is empty.");
+        } 
+        else{
             return null;
         }
     }
@@ -72,7 +71,8 @@ public class LinkedStack<T> implements Stack<T> {
     public boolean isEmpty() {
         if (topNode == null){
             return true;
-        } else{
+        } 
+        else{
             return false;
         }
     }
@@ -85,15 +85,4 @@ public class LinkedStack<T> implements Stack<T> {
             topNode = topNode.next;
         }
     }
-
-    public static void main(String[] args) {
-        LinkedStack<String> testStack = new LinkedStack<String>();
-        testStack.push("Hi");
-        testStack.push("Hello");
-        System.out.println(testStack.isEmpty());
-        System.out.println(testStack.pop());
-        System.out.println(testStack.isEmpty());
-        System.out.println(testStack.peek());
-    }
-    
 }

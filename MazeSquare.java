@@ -97,7 +97,5 @@ public class MazeSquare {
      */
     public void resetSolutionPiece() {
       solutionPiece = false;
-    }
-    
-    
+    }  
 } 
